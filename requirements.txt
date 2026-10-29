@@ -1,3 +1,5 @@
+mlxtend
+statsmodels
 streamlit
 pandas
 numpy
