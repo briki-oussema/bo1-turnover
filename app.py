@@ -7,9 +7,9 @@ st.set_page_config(page_title="RH Analytics · 6 objectifs métier", page_icon="
                    layout="wide", initial_sidebar_state="expanded")
 
 # ------------------------------------------------------------------ équipe & contenu (habillage uniquement)
-ROSTER = {1: ( 'Réduire le turnover', 'Briki Oussema'),
-          2: ( 'Prévenir le burn-out', 'Mahmoud Mabrouk'),
-          3: ( 'Planifier les promotions', 'Loua Cherif'),
+ROSTER = {1: ('Réduire le turnover', 'Briki Oussema'),
+          2: ('Prévenir le burn-out', 'Mahmoud Mabrouk'),
+          3: ('Planifier les promotions', 'Loua Cherif'),
           4: ('Cibler les viviers de recrutement', 'Ahmed Ghabri'),
           5: ('Garantir l’équité salariale', 'Sarra Ghedir'),
           6: ('Optimiser le temps de travail', 'Med Tayeb El Elmi')}
@@ -42,7 +42,6 @@ div[data-testid="stMetric"]{background:rgba(127,127,127,.06);border:1px solid rg
 .step-n{font-size:1.7rem;font-weight:800;color:#4f46e5;line-height:1;}
 .foot{color:#6b7280;font-size:.84rem;border-top:1px solid rgba(127,127,127,.2);
       margin-top:30px;padding-top:14px;line-height:1.7;}
-h3 .emoji{font-size:1.3rem;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -72,7 +71,7 @@ def aller(dest):
 
 # ------------------------------------------------------------------ rendu d'un BO (logique d'origine conservée)
 def render_bo(n):
-    emoji, titre, auteur = ROSTER[n]
+    titre, auteur = ROSTER[n]
     st.markdown(f"<span class='badge b-ok'>BO{n}</span>  ·  **{auteur}**", unsafe_allow_html=True)
     try:
         mod = importlib.import_module(f'modules.bo{n}')
@@ -104,8 +103,8 @@ def render_home():
         unsafe_allow_html=True)
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Objectifs métier", "6")
-    c2.metric("Outils en ligne", "6 / 6" )
+    c1.metric("Objectifs métier", str(len(ROSTER)))
+    c2.metric("Outils en ligne", f"{PRETS} / {len(ROSTER)}")
     c3.metric("Méthodologie", "CRISP-DM")
     c4.metric("Membres de l'équipe", str(len(ROSTER)))
 
@@ -114,9 +113,9 @@ def render_home():
     items = list(ROSTER.items())
     for row in range(0, len(items), 3):
         cols = st.columns(3)
-        for col, (n, (emoji, titre, auteur)) in zip(cols, items[row:row + 3]):
+        for col, (n, (titre, auteur)) in zip(cols, items[row:row + 3]):
             with col.container(border=True):
-                st.markdown(f"#### <span class='emoji'>{emoji}</span> BO{n}", unsafe_allow_html=True)
+                st.markdown(f"#### BO{n}")
                 st.markdown(f"**{titre}**  &nbsp; {BADGE[STATUS[n]]}", unsafe_allow_html=True)
                 st.caption(PITCH[n])
                 st.caption(f"👤 {auteur}")
@@ -139,7 +138,7 @@ def render_home():
             st.markdown(f"**{titre}**")
             st.caption(txt)
 
-    equipe = " · ".join(f"{a} (BO{n})" for n, (_, _, a) in ROSTER.items())
+    equipe = " · ".join(f"{a} (BO{n})" for n, (_, a) in ROSTER.items())
     st.markdown(
         f"<div class='foot'><b>Équipe</b> — {equipe}<br>"
         "Projet pédagogique de Machine Learning (CRISP-DM). Outils d'aide à la décision RH : "
@@ -157,8 +156,8 @@ with st.sidebar:
     def fmt(o):
         if o == 'home':
             return '🏠   Accueil'
-        emoji, titre, _ = ROSTER[o]
-        return f'{emoji}   BO{o} · {titre}  {STATUS[o]}'
+        titre, _ = ROSTER[o]
+        return f'BO{o} · {titre}  {STATUS[o]}'
 
     st.radio("Navigation", options, format_func=fmt, key='nav', label_visibility='collapsed')
     st.divider()
