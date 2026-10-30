@@ -7,12 +7,12 @@ st.set_page_config(page_title="RH Analytics · 6 objectifs métier", page_icon="
                    layout="wide", initial_sidebar_state="expanded")
 
 # ------------------------------------------------------------------ équipe & contenu (habillage uniquement)
-ROSTER = {1: ('🚪', 'Réduire le turnover', 'Briki Oussema'),
-          2: ('🔥', 'Prévenir le burn-out', 'Mahmoud Mabrouk'),
-          3: ('🏆', 'Planifier les promotions', 'Loua Cherif'),
-          4: ('🎯', 'Cibler les viviers de recrutement', 'Ahmed Ghabri'),
-          5: ('⚖️', 'Garantir l’équité salariale', 'Sarra Ghedir'),
-          6: ('⏱️', 'Optimiser le temps de travail', 'Med Tayeb El Elmi')}
+ROSTER = {1: ( 'Réduire le turnover', 'Briki Oussema'),
+          2: ( 'Prévenir le burn-out', 'Mahmoud Mabrouk'),
+          3: ( 'Planifier les promotions', 'Loua Cherif'),
+          4: ('Cibler les viviers de recrutement', 'Ahmed Ghabri'),
+          5: ('Garantir l’équité salariale', 'Sarra Ghedir'),
+          6: ('Optimiser le temps de travail', 'Med Tayeb El Elmi')}
 
 PITCH = {1: "Classer chaque employé selon son risque de départ, pour agir avant qu'il parte.",
          2: "Anticiper le risque de burn-out des équipes et prévenir l'épuisement.",
@@ -105,7 +105,7 @@ def render_home():
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Objectifs métier", "6")
-    c2.metric("Outils en ligne", f"{PRETS} / 6")
+    c2.metric("Outils en ligne", 6 / 6")
     c3.metric("Méthodologie", "CRISP-DM")
     c4.metric("Membres de l'équipe", str(len(ROSTER)))
 
