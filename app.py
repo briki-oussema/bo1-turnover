@@ -104,7 +104,7 @@ def render_home():
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Objectifs métier", str(len(ROSTER)))
-    c2.metric("Outils en ligne", "6 / 6")
+    c2.metric("Outils en ligne", f"{PRETS} / {len(ROSTER)}")
     c3.metric("Méthodologie", "CRISP-DM")
     c4.metric("Membres de l'équipe", str(len(ROSTER)))
 
